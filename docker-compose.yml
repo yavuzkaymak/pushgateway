@@ -37,7 +37,23 @@ services:
     networks:
       - monitor-net
 
-  
+
+  influxdb:
+    image: influxdb:1.8.10
+    environment:
+      - INFLUXDB_DB=mammut
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=admin
+   
+    restart: unless-stopped
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+      - "8090:8090"
+      - "2003:2003"
+    networks:
+      - monitor-net
+    
   grafana:
     image: grafana/grafana
     container_name: grafana

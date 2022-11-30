@@ -8,3 +8,17 @@ datasources:
   - name: prometheus
     type: prometheus
     url: http://prometheus:9090
+    uid: prometheus
+
+  - name: InfluxDB
+    type: influxdb
+    uid: influxdb
+    access: proxy
+    database: mammut
+    user: admin
+    password: admin
+    url: http://influxdb:8086
+    isDefault: true
+    editable: true
+    jsonData:    
+      httpMode: GET    
