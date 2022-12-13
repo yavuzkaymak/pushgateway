@@ -12,8 +12,6 @@ echo "$metric" | curl --data-binary @- http://localhost:9091/metrics/job/custome
 
 
 
-
-
 read -r -d '' metric << EOM
 rows_insterted,stage=biw,instance=talend,table_name=prd_customer value=10
 EOM
@@ -21,3 +19,12 @@ EOM
 echo sending metric to Influxdb
 echo $metric
 echo "$metric" | curl -i -XPOST --data-binary @- http://localhost:8086/write?db=mammut -s
+
+
+read -r -d '' metric << EOM
+rows_insterted;stage=biw;instance=talend;table_name=prd_customer 10 $(date +%s)
+EOM
+
+echo sending metric to Influxdb
+echo $metric
+echo "$metric" | nc localhost 2003 -q0

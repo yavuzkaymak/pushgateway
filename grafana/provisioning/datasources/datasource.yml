@@ -21,4 +21,12 @@ datasources:
     isDefault: true
     editable: true
     jsonData:    
-      httpMode: GET    
+      httpMode: GET
+
+  - name: Graphite
+    type: graphite
+    uid: graphite
+    access: proxy
+    url: http://graphite:80
+    jsonData:
+      graphiteVersion: '1.1'        
