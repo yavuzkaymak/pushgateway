@@ -24,10 +24,100 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.2.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "graphite",
+            "uid": "graphite"
+          },
+          "key": "Q-475eaf4a-0e83-4dd7-a753-3e9b052bce5d-0",
+          "refId": "A",
+          "target": "aliasByTags(seriesByTag('name=rows_inserted', 'table_name=prd_customer', 'stage=biw', 'instance=talend'), 'name')"
+        }
+      ],
+      "title": "Graphite ",
+      "type": "timeseries"
+    },
     {
       "datasource": {
         "type": "prometheus",
@@ -73,7 +163,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -88,7 +179,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 8
       },
       "id": 2,
       "options": {
@@ -110,7 +201,7 @@
             "uid": "prometheus"
           },
           "editorMode": "builder",
-          "expr": "rows_insterted{job=\"customer\", stage=\"biw\", table_name=\"prd_customer\", instance=\"talend\"}",
+          "expr": "rows_inserted{job=\"customer\", stage=\"biw\", table_name=\"prd_customer\", instance=\"talend\"}",
           "instant": true,
           "key": "Q-8e7ea7ed-3043-479f-bd2f-b47e4201d45d-0",
           "legendFormat": "{{__name__}}",
@@ -166,7 +257,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -181,7 +273,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 8
+        "y": 16
       },
       "id": 1,
       "options": {
@@ -204,7 +296,7 @@
           },
           "groupBy": [],
           "key": "Q-cf255250-0ff8-4912-9926-77089206796f-0",
-          "measurement": "rows_insterted",
+          "measurement": "rows_inserted",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -251,13 +343,106 @@
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Comparison",
   "uid": "ivcnbSFVz",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
+}
+
+
+{
+  "datasource": {
+    "type": "graphite",
+    "uid": "graphite"
+  },
+  "fieldConfig": {
+    "defaults": {
+      "color": {
+        "mode": "palette-classic"
+      },
+      "custom": {
+        "axisCenteredZero": false,
+        "axisColorMode": "text",
+        "axisLabel": "",
+        "axisPlacement": "auto",
+        "barAlignment": 0,
+        "drawStyle": "line",
+        "fillOpacity": 0,
+        "gradientMode": "none",
+        "hideFrom": {
+          "legend": false,
+          "tooltip": false,
+          "viz": false
+        },
+        "lineInterpolation": "linear",
+        "lineWidth": 1,
+        "pointSize": 5,
+        "scaleDistribution": {
+          "type": "linear"
+        },
+        "showPoints": "auto",
+        "spanNulls": false,
+        "stacking": {
+          "group": "A",
+          "mode": "none"
+        },
+        "thresholdsStyle": {
+          "mode": "off"
+        }
+      },
+      "mappings": [],
+      "thresholds": {
+        "mode": "absolute",
+        "steps": [
+          {
+            "color": "green",
+            "value": null
+          },
+          {
+            "color": "red",
+            "value": 80
+          }
+        ]
+      }
+    },
+    "overrides": []
+  },
+  "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 0,
+    "y": 0
+  },
+  "id": 4,
+  "options": {
+    "legend": {
+      "calcs": [],
+      "displayMode": "list",
+      "placement": "bottom",
+      "showLegend": true
+    },
+    "tooltip": {
+      "mode": "single",
+      "sort": "none"
+    }
+  },
+  "pluginVersion": "9.2.3",
+  "targets": [
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
+      "key": "Q-475eaf4a-0e83-4dd7-a753-3e9b052bce5d-0",
+      "refId": "A",
+      "target": "aliasByTags(seriesByTag('name=rows_inserted', 'table_name=prd_customer', 'stage=biw', 'instance=talend'), 'name')"
+    }
+  ],
+  "title": "Graphite ",
+  "type": "timeseries"
 }

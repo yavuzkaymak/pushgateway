@@ -1,7 +1,14 @@
 # pushgateway
 
-## How to start
+This docker compose stack spins up grafana, graphite, influxdb, prometheus and pushgateway.
+send_metric.sh sends the same metric to pushgateway, graphite and inlufxdb.
+In grafana you can find a comparision dashboard which visualizes all three tsdbs.
 
+## How to start
+First generate ssl certificates for grafana
+```
+docker compose -f generate-certs.yml run --rm cert  
+```
 ```
 
 docker compose up
@@ -12,7 +19,7 @@ docker compose up
 
 ```
 
-.\send_metric.sh
+./send_metric.sh
 ```
 
-Check [grafana](http://localhost:3000)
+Check [grafana](https://localhost:3000)

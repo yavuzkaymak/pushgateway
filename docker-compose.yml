@@ -50,15 +50,24 @@ services:
       - "8083:8083"
       - "8086:8086"
       - "8090:8090"
-      - "2003:2003"
     networks:
       - monitor-net
+
+  graphite:
+    image: graphiteapp/graphite-statsd
+    restart: unless-stopped
+    ports:
+      - "2003:2003"
+      - "8080:8080"
+    networks:
+      - monitor-net
+
     
   grafana:
     image: grafana/grafana
     container_name: grafana
     volumes:
-      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana:/etc/grafana
 
     environment:
       - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}

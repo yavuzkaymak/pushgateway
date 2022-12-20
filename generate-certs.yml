@@ -1,0 +1,11 @@
+version: '3'
+services:
+  cert:
+    image: nginx
+    volumes: 
+      - ./grafana/:/work
+    command: > 
+        bash -c  "openssl req -x509 -sha256 -batch -nodes \
+        -days 365 -newkey rsa:2048 -keyout /work/grafana.key 
+        -out /work/grafana.crt &&
+        chown -R 472 /work"
