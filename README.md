@@ -11,7 +11,7 @@ docker compose -f generate-certs.yml run --rm cert
 ```
 ```
 
-docker compose up
+docker compose up -d 
 
 ```
 

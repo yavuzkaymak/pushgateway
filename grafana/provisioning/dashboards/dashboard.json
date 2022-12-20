@@ -165,6 +165,8 @@
               {
                 "color": "green",
                 "value": null
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -274,6 +276,7 @@
         "w": 12,
         "x": 0,
         "y": 16
+        "y": 16
       },
       "id": 1,
       "options": {
@@ -350,6 +353,7 @@
   "timezone": "",
   "title": "Comparison",
   "uid": "ivcnbSFVz",
+  "version": 1,
   "version": 1,
   "weekStart": ""
 }

@@ -60,8 +60,8 @@ services:
       - "2003:2003"
       - "8080:8080"
     networks:
-      - monitor-net
-
+      - monitor-net      
+    
     
   grafana:
     image: grafana/grafana
@@ -74,8 +74,6 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - GF_USERS_ALLOW_SIGN_UP=false
     restart: unless-stopped
-    expose:
-      - 3000
     ports:
       - '3000:3000'
     networks:

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+## send metric to pushgateway
 ## PUSHGATEWAY
 read -r -d '' metric << EOM
 # TYPE rows_inserted gauge
@@ -11,10 +12,9 @@ echo $metric
 echo "$metric" | curl --data-binary @- http://localhost:9091/metrics/job/customer -ks
 
 
-
-## INFLUXDB
+## send metric to influxdb
 read -r -d '' metric << EOM
-rows_inserted,stage=biw,instance=talend,table_name=prd_customer value=10
+rows_insterted,stage=biw,instance=talend,table_name=prd_customer value=10
 EOM
 
 echo sending metric to Influxdb
