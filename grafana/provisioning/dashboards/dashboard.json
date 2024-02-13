@@ -11,12 +11,6 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
-        "target": {
-          "limit": 100,
-          "matchAny": false,
-          "tags": [],
-          "type": "dashboard"
-        },
         "type": "dashboard"
       }
     ]
@@ -24,13 +18,14 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
-        "type": "graphite",
-        "uid": "graphite"
+        "type": "prometheus",
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -38,6 +33,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -51,6 +47,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -80,7 +77,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -90,7 +88,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 4,
+      "id": 3,
       "options": {
         "legend": {
           "calcs": [],
@@ -103,25 +101,32 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "9.2.3",
       "targets": [
         {
           "datasource": {
-            "type": "graphite",
-            "uid": "graphite"
+            "type": "prometheus",
+            "uid": "prometheus"
           },
-          "key": "Q-475eaf4a-0e83-4dd7-a753-3e9b052bce5d-0",
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "rows_inserted{job=\"customer\"}",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "key": "Q-3618eb68-f2bb-4597-a22b-e18ed196e28a-0",
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A",
-          "target": "aliasByTags(seriesByTag('name=rows_inserted', 'table_name=prd_customer', 'stage=biw', 'instance=talend'), 'name')"
+          "useBackend": false
         }
       ],
-      "title": "Graphite ",
+      "title": "Prom",
+      "transformations": [],
       "type": "timeseries"
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
+        "type": "influxdb",
+        "uid": "influxdb"
       },
       "fieldConfig": {
         "defaults": {
@@ -129,12 +134,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "points",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -142,6 +148,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -165,6 +172,147 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "influxdb"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "rows_insterted",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "distinct"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "instance::tag",
+              "operator": "=",
+              "value": "talend"
+            },
+            {
+              "condition": "AND",
+              "key": "stage::tag",
+              "operator": "=",
+              "value": "biw"
+            },
+            {
+              "condition": "AND",
+              "key": "table_name::tag",
+              "operator": "=",
+              "value": "prd_customer"
+            }
+          ]
+        }
+      ],
+      "title": "Influx",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "graphite",
+        "uid": "graphite"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
                 "color": "green",
                 "value": null
               },
@@ -173,7 +321,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unitScale": true
         },
         "overrides": []
       },
@@ -196,257 +345,36 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "10.3.1",
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
+            "type": "graphite",
+            "uid": "graphite"
           },
-          "editorMode": "builder",
-          "expr": "rows_inserted{job=\"customer\", stage=\"biw\", table_name=\"prd_customer\", instance=\"talend\"}",
-          "instant": true,
-          "key": "Q-8e7ea7ed-3043-479f-bd2f-b47e4201d45d-0",
-          "legendFormat": "{{__name__}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Pushgateway",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "influxdb"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 16
-        "y": 16
-      },
-      "id": 1,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "influxdb"
-          },
-          "groupBy": [],
-          "key": "Q-cf255250-0ff8-4912-9926-77089206796f-0",
-          "measurement": "rows_inserted",
-          "orderByTime": "ASC",
-          "policy": "default",
           "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "value"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "instance",
-              "operator": "=",
-              "value": "talend"
-            },
-            {
-              "condition": "AND",
-              "key": "stage",
-              "operator": "=",
-              "value": "biw"
-            },
-            {
-              "condition": "AND",
-              "key": "table_name",
-              "operator": "=",
-              "value": "prd_customer"
-            }
-          ]
+          "target": "seriesByTag('instance=talend', 'stage=biw', 'table_name=prd_customer')"
         }
       ],
-      "title": "InfluxDB",
+      "title": "Graphite",
+      "transformations": [],
       "type": "timeseries"
     }
   ],
-  "schemaVersion": 37,
-  "style": "dark",
+  "refresh": "",
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Comparison",
-  "uid": "ivcnbSFVz",
-  "version": 1,
-  "version": 1,
+  "title": "Default",
+  "uid": "a6a8af18-3a23-4c27-ae99-4c9c2ce79adf",
+  "version": 7,
   "weekStart": ""
-}
-
-
-{
-  "datasource": {
-    "type": "graphite",
-    "uid": "graphite"
-  },
-  "fieldConfig": {
-    "defaults": {
-      "color": {
-        "mode": "palette-classic"
-      },
-      "custom": {
-        "axisCenteredZero": false,
-        "axisColorMode": "text",
-        "axisLabel": "",
-        "axisPlacement": "auto",
-        "barAlignment": 0,
-        "drawStyle": "line",
-        "fillOpacity": 0,
-        "gradientMode": "none",
-        "hideFrom": {
-          "legend": false,
-          "tooltip": false,
-          "viz": false
-        },
-        "lineInterpolation": "linear",
-        "lineWidth": 1,
-        "pointSize": 5,
-        "scaleDistribution": {
-          "type": "linear"
-        },
-        "showPoints": "auto",
-        "spanNulls": false,
-        "stacking": {
-          "group": "A",
-          "mode": "none"
-        },
-        "thresholdsStyle": {
-          "mode": "off"
-        }
-      },
-      "mappings": [],
-      "thresholds": {
-        "mode": "absolute",
-        "steps": [
-          {
-            "color": "green",
-            "value": null
-          },
-          {
-            "color": "red",
-            "value": 80
-          }
-        ]
-      }
-    },
-    "overrides": []
-  },
-  "gridPos": {
-    "h": 8,
-    "w": 12,
-    "x": 0,
-    "y": 0
-  },
-  "id": 4,
-  "options": {
-    "legend": {
-      "calcs": [],
-      "displayMode": "list",
-      "placement": "bottom",
-      "showLegend": true
-    },
-    "tooltip": {
-      "mode": "single",
-      "sort": "none"
-    }
-  },
-  "pluginVersion": "9.2.3",
-  "targets": [
-    {
-      "datasource": {
-        "type": "graphite",
-        "uid": "graphite"
-      },
-      "key": "Q-475eaf4a-0e83-4dd7-a753-3e9b052bce5d-0",
-      "refId": "A",
-      "target": "aliasByTags(seriesByTag('name=rows_inserted', 'table_name=prd_customer', 'stage=biw', 'instance=talend'), 'name')"
-    }
-  ],
-  "title": "Graphite ",
-  "type": "timeseries"
 }
